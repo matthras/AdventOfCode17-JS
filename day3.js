@@ -29,3 +29,43 @@ function day3part1(num) {
 }
 
 console.log(day3part1(325489));
+
+function day3part2(num) {
+  var matrix = new Array(); // 9x9 matrix 
+  for(var m = 0; m < 13; m++){
+    matrix[m] = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0)
+  }
+  // Middle is (4,4)
+  var x = 6;
+  var y = 6;
+  var numSteps = 1;
+  matrix[x][y] = 1;
+  for(var i = 1; i < 81; i++){
+    for(var j = 0; j < numSteps; j++) {
+      y += 1;
+      matrix[x][y] = matrix[x-1][y-1] + matrix[x-1][y] + matrix[x-1][y+1] + matrix[x][y-1] + matrix[x][y+1] + matrix[x+1][y-1] + matrix[x+1][y] + matrix[x+1][y+1];
+      if(matrix[x][y] > 325489) { return matrix[x][y]}
+    }
+    for(var j = 0; j < numSteps; j++) {
+      x -= 1;  
+      matrix[x][y] = matrix[x-1][y-1] + matrix[x-1][y] + matrix[x-1][y+1] + matrix[x][y-1] + matrix[x][y+1] + matrix[x+1][y-1] + matrix[x+1][y] + matrix[x+1][y+1];
+      if(matrix[x][y] > 325489) { return matrix[x][y]}
+    }
+    numSteps++;
+    for(var j = 0; j < numSteps; j++) {
+      y -= 1;
+      matrix[x][y] = matrix[x-1][y-1] + matrix[x-1][y] + matrix[x-1][y+1] + matrix[x][y-1] + matrix[x][y+1] + matrix[x+1][y-1] + matrix[x+1][y] + matrix[x+1][y+1];
+      if(matrix[x][y] > 325489) { return matrix[x][y]}
+    }
+    for(var j = 0; j < numSteps; j++) {
+      x += 1;
+      matrix[x][y] = matrix[x-1][y-1] + matrix[x-1][y] + matrix[x-1][y+1] + matrix[x][y-1] + matrix[x][y+1] + matrix[x+1][y-1] + matrix[x+1][y] + matrix[x+1][y+1];
+      if(matrix[x][y] > 325489) { return matrix[x][y]}
+    }
+    numSteps ++;
+    console.log(matrix)
+  }
+
+}
+
+console.log(day3part2(325489)) // Don't ask me how it works when the matrix stops forming, but it definitely gives you the right answer at the end!
