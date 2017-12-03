@@ -30,3 +30,23 @@ function day2part1(arr) {
 }
 
 console.log(day2part1(spreadsheet));
+
+function day2part2(arr) {
+  var sum = 0;
+  for(var i = 0; i < arr.length; i++) {
+    for(var j = 0; j < arr[i].length; j++) {
+      for(var k = j+1; k < arr[i].length; k++) {
+        if(arr[i][j] / arr[i][k] === Math.round(arr[i][j] / arr[i][k])) {
+          sum += arr[i][j] / arr[i][k];
+          break;
+        } else if (arr[i][k] / arr[i][j] === Math.round(arr[i][k] / arr[i][j])) {
+          sum+= arr[i][k] / arr[i][j];
+          break;
+        }
+      }
+    }
+  }
+  return sum;
+}
+
+console.log(day2part2(spreadsheet));
